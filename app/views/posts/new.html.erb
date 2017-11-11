@@ -1,2 +1,9 @@
 <h1>Posts#new</h1>
 <p>Find me in app/views/posts/new.html.erb</p>
+
+<%= form_with model: @post do |f| %>
+	<input type="hidden" name="user_id" value="<%= @user_id %>" >
+	<%= f.text_field :title, placeholder: 'Title' %>
+	<%= f.text_area :content, placeholder: 'Post Body' %>
+	<%= f.submit %>
+<% end -%>

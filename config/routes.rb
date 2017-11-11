@@ -1,21 +1,17 @@
 Rails.application.routes.draw do
-  
-  get 'comments/index'
-
-  get 'comments/new'
-
-  get 'comments/create'
-
-  get 'comments/show'
-
-  get 'comments/edit'
-
-  get 'comments/update'
-
-  get 'comments/destroy'
 
   get 'home/index'
+  
+  root 'home#index'
 
+  resources :users do
+  	resources :posts, shallow: true
+  end
+
+  resources :comments
+
+  resources :sessions, except: [:destroy]
+  delete '/sessions' => 'sessions#destroy', as: :logout
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   
