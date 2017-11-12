@@ -14,5 +14,15 @@
 //= require turbolinks
 //= require_tree 
 //= require jquery3
+//= require jquery
 //= require popper
+//= require bootstrap
 //= require bootstrap-sprockets
+//= require jquery_ujs
+//= require jquery.purr
+//= require best_in_place
+
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+});

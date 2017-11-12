@@ -1,3 +1,41 @@
 <h1>Posts#show</h1>
-<h1><%= @post.title %></h1>
-<p><%= @post.content %></p>
+<div class="post-wrapper" onclick="">
+	<div class="display-name-wrapper">
+		<%= link_to "@#{@post.user.dis_name}", user_path(@post.user_id) %>
+	</div>
+	<div class="title-wrapper">
+		<strong><%= best_in_place_if @post.user.id == current_user.id, @post, :title, :as => :input %></strong>
+	</div>
+	<div class="content-wrapper">
+		<%= best_in_place_if @post.user.id == current_user.id, @post, :content, :as => :textarea %>	</div>
+	<div class="options-wrapper">
+		<% if @post.user.id == current_user.id %>
+			<%= link_to "Edit", edit_post_path(@post) %>
+			<%= link_to "Delete Post", @post, method: :delete %>		
+		<% end %>
+
+	</div>
+	<div class="new-comment-wrapper">
+		<%= form_with model: @comment, url: post_comments_path do |f| %>
+		<input type="hidden" name="user_id" value="current_user.id">
+		<input type="hidden" name="post_id" value="#{@post.id}">
+
+		<div class="content-wrapper">
+			<%= f.text_area :content, placeholder: 'Post Body' %>
+		</div>
+		<div class="options-wrapper">
+			<%= f.submit %>
+		</div>
+	<% end -%>
+	</div>
+	<% @comments.find_each do |comment| %>
+		<div class="comment-wrapper">
+			<div class="display-name-wrapper">
+				<%= link_to "@#{@post.user.dis_name}", user_path(@post.user_id) %>
+			</div>
+			<div class="content-wrapper">
+				<%= comment %>
+			</div>
+		</div>
+	<% end %>
+	</div>

@@ -33,6 +33,7 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 
 gem 'jquery-rails'
 
+gem 'best_in_place', '~> 3.1', '>= 3.1.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

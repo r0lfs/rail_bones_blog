@@ -1,7 +1,7 @@
 <h1>Users#new</h1>
 
 <% if flash.alert %>
-	<h4><%= flash.alert %></h4>
+	<h4 style="color:red;"><%= flash.alert %></h4>
 <% end %>
 
 <%= form_with model: @user do |f| %>

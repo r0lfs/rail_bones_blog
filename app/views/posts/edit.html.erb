@@ -1,2 +1,17 @@
 <h1>Posts#edit</h1>
 <p>Find me in app/views/posts/edit.html.erb</p>
+<% if flash[:alert] %>
+	<h1><%= flash[:alert] %></h1>
+<% end %>
+<div class="post-wrapper">
+	<div class="title-wrapper">
+		<strong><%= best_in_place @post, :title, as: :input, :ok_button => 'Save', :cancel_button => 'Cancel' %></strong>
+	</div>
+	<div class="content-wrapper">
+		<%= best_in_place @post, :content, as: :textarea, :ok_button => 'Save', :cancel_button => 'Cancel' %>
+	</div>
+	<div class="options-wrapper">
+			<%= link_to "Delete Post", @post, method: :delete %>		
+	</div>
+</div>
+

@@ -3,9 +3,13 @@ class CommentsController < ApplicationController
   end
 
   def new
+    @comment = Comment.new
   end
 
   def create
+    @comment = Comment.new
+    @user = current_user
+    @post = 
   end
 
   def show

@@ -7,20 +7,18 @@ class PostsController < ApplicationController
 
   def new
     p params
-    @user_id = params[:user_id]
     @post = Post.new
   end
 
   def create
-    
-    @user = User.find(params[:user_id])
-    p params
+    @user = current_user
     @post = @user.posts.create(post_params)
     redirect_to @post
   end
 
   def show
     @post = Post.find(params[:id])
+    @comments = Comment.where(:post_id == @post.id)
   end
 
   def edit
@@ -29,13 +27,20 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to @post
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to(@post, flash[:alert] = 'User was successfully updated.') }
+        format.json { respond_with_bip(@post) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@post) }
+      end
+    end
   end
 
   def destroy
     Post.find(params[:id]).destroy
-    redirect_to posts_path
+    redirect_to root_path
   end
 
   private
