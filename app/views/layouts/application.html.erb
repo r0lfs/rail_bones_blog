@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailBonesBlog</title>
+    <title>The Jonestown Getdown</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,74 @@
   </head>
 
   <body>
-    <%= yield %>
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg container">
+        <a class="navbar-brand" href="#">Jonestown Getdown</a>
+        <% if user_logged_in? %>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto nav-pills nav-fill">
+              <li class="nav-item">
+                <%= link_to "Home", root_path, :class => "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "New Post", new_user_post_path(current_user), :class => 'nav-link' %>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile Options</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%= link_to "View Profile", user_path(current_user), :class => "dropdown-item" %>
+                    <%= link_to "Edit Posts", user_posts_path(current_user), :class => "dropdown-item"%>
+                    <%= link_to "Edit Profile", edit_user_path(current_user), :class => "dropdown-item" %>
+                    
+
+                  <div class="dropdown-divider"></div>
+                  <%= link_to "Log Out", logout_path, method: :delete, :class => "dropdown-item" %>
+                </div>
+              </li>
+            </ul>
+          <% else %>
+            <ul class="navbar-nav mr-auto nav-pills nav-fill">
+              <li class="nav-item"><%= link_to "Users New", new_user_path, :class => "nav-link" %></li>
+              <li class="nav-item"><%= link_to "Log In", new_session_path, :class => "nav-link" %></li>
+            </ul>
+          <% end %>
+            <div class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+      </nav>
+
+  	<div class="container">
+  		<div class="row">
+       <% if user_logged_in? %>
+          <div class="col-sm-3" id="user_info">
+          <div id="user-name-wrapper">
+            <h3><%= link_to "@#{current_user.dis_name}", user_path(current_user) %>
+          </div>
+          <div id="user-info-wrapper">
+            <div id="about">
+              <p>
+                <%= current_user.about %>
+              </p>
+            </div>
+          </div>
+          <div id="user-info-wrapper"></div>
+          </div>
+        <% else %>
+          <div class="col-sm-3"></div> <!--for spacing purposes only -->
+        <% end %>
+
+        <div class="col-sm-9">
+    		  <%= yield %>
+        </div>
+
+    	</div>
+  	</div>
   </body>
 </html>
+
+

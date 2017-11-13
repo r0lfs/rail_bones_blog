@@ -1,0 +1,36 @@
+<h1>Users#edit</h1>
+
+<h1>Update Your Info</h1>
+<%= form_with model: @user do |f| %>
+	<div class="form-group">
+		<%= f.text_field :first_name, placeholder: "First Name", :maxlength => 25, :class => 'sign_in sign_in_top' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :last_name, placeholder: "Last Name", :maxlength => 25, :class => 'sign_in' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :dis_name, required: true, placeholder: "*Display Name", :maxlength => 25, :class => 'sign_in' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :email, required: true, placeholder: "*Email", :maxlength => 50, :class => 'sign_in' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_area :about, placeholder: 'About', :maxlength => 500, :class => 'sign_in' %>
+	</div>
+	<div class="sign_in_notes">
+		* denotes required field <br>
+		Enter Password to confirm changes:
+	
+		<% if flash[:alert] %>
+			<p style="color: red;"><%= flash[:alert] %></p>
+		<% end %>
+	</div>
+	<div class="form-group">
+		<%= f.password_field :password, placeholder: "*Password", :maxlength => 25, :class => 'sign_in' %>
+	</div>
+	<%= f.submit :class => 'btn btn-primary'  %>
+<% end %>
+
+
+<%= link_to "Delete Account", @user, method: :delete, data: { confirm: 'Are you sure you want to delete your account?' } %>		
+

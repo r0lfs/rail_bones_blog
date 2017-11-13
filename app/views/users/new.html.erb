@@ -1,0 +1,27 @@
+<h1>Users#new</h1>
+
+<% if flash.alert %>
+	<h4 style="color:red;"><%= flash.alert %></h4>
+<% end %>
+
+<%= form_with model: @user do |f| %>
+	<div class="form-group">
+		<%= f.text_field :first_name, placeholder: "First Name", :maxlength => 25, :class => 'sign_in sign_in_top' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :last_name, placeholder: "Last Name", :maxlength => 25, :class => 'sign_in' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :dis_name, required: true, placeholder: "*Display Name", :maxlength => 25, :class => 'sign_in' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :email, required: true, placeholder: "*Email", :maxlength => 50, :class => 'sign_in' %>
+	</div>
+	<div class="form-group">
+		<%= f.password_field :password, required: true, placeholder: "*Password", :maxlength => 25, :class => 'sign_in' %>
+	</div>
+	<p class="sign_in_notes">
+		* denotes required field
+	</p>
+	<%= f.submit :class => 'btn btn-primary'  %>
+<% end %>
