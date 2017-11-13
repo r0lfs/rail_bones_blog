@@ -1,6 +1,4 @@
-<h1>Users#edit</h1>
 
-<h1>Update Your Info</h1>
 <%= form_with model: @user do |f| %>
 	<div class="form-group">
 		<%= f.text_field :first_name, placeholder: "First Name", :maxlength => 25, :class => 'sign_in sign_in_top' %>
@@ -32,5 +30,5 @@
 <% end %>
 
 
-<%= link_to "Delete Account", @user, method: :delete, data: { confirm: 'Are you sure you want to delete your account?' } %>		
+<%= link_to "Delete Account", @user, method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure you want to delete your account?' } %>		
 

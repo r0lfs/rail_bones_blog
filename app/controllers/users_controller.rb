@@ -16,13 +16,15 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      flash[:alert] = 'Your account did not get created'
+      flash[:alert] = 'Email or Display Name already taken'
       redirect_to new_user_path
     end
   end
 
   def show
     @user = User.find(params[:id])
+    @posts= @user.posts.all
+    @comments = Comment.all
   end
 
   def edit
@@ -32,7 +34,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     #checks to make sure pass matches and email and dsiplay name aren't blank before updating
-    if @user.password == user_params[:password] and user_params[:email] != '' and user_params[:dis_name] != '' 
+    if @user.password == user_params[:password] and @user.update(user_params)
       @user.update(user_params)
       redirect_to @user
     else

@@ -4,6 +4,7 @@
 	<h4 style="color:red;"><%= flash.alert %></h4>
 <% end %>
 
+
 <%= form_with model: @user do |f| %>
 	<div class="form-group">
 		<%= f.text_field :first_name, placeholder: "First Name", :maxlength => 25, :class => 'sign_in sign_in_top' %>

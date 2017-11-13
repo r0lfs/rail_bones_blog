@@ -1,4 +1,4 @@
-          Prefix Verb   URI Pattern                            Controller#Action
+           Prefix Verb   URI Pattern                            Controller#Action
       home_index GET    /home/index(.:format)                  home#index
             root GET    /                                      home#index
       user_posts GET    /users/:user_id/posts(.:format)        posts#index
@@ -40,4 +40,4 @@ new_post_comment GET    /posts/:post_id/comments/new(.:format) comments#new
          session GET    /sessions/:id(.:format)                sessions#show
                  PATCH  /sessions/:id(.:format)                sessions#update
                  PUT    /sessions/:id(.:format)                sessions#update
-          logout DELETE /sessions(.:format)                    sessions#destroy
+          logout DELETE /sessions(.:format)                    sessions#destroy 
