@@ -1,2 +1,42 @@
 <h1>Users#show</h1>
-<%= @user.id %>
+<div class="profile-wrapper">
+	<div class="user-information">
+		
+	</div>
+	<% @posts.reverse.each do |post| %>
+		<div class="post-wrapper">
+			<div class="title-wrapper">
+				<div class="display-name-wrapper">
+					<%= link_to "@#{post.user.dis_name}", user_path(post.user_id) %>
+				</div>
+				<strong><h3><%= best_in_place_if post.user.id == current_user.id, post, :title, :as => :input %></h3></strong> 
+			</div>
+
+			<div class="content-wrapper">
+				<%= best_in_place_if post.user.id == current_user.id, post, :content, :as => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel' %>
+			</div>
+
+			<div class="options-wrapper">
+				<a href="" class="options badge badge-info" onclick="$('#comment<%= post.id %>').toggle(); event.preventDefault()">Show Comments</a>	
+			</div>
+			
+			<div class="comment-wrapper" id="comment<%= post.id %>">
+				<% @comments.where(post_id: post.id).find_each do |comment| %>
+					
+					<div class="comment-content-wrapper">
+						<div class="display-name-wrapper">
+						<%= link_to "@#{comment.user.dis_name}", user_path(comment.user.id) %>
+					</div>
+					<div class="content-wrapper">
+						<%= comment.content %>
+					</div>
+						<% if comment.user_id == current_user.id %>
+							<%= link_to "Delete Comment", comment, method: :delete, :class => 'badge badge-danger' %>
+						<% end %>
+					</div>
+					
+				<% end %>
+			</div>
+		</div>
+<% end %>
+</div>
