@@ -10,6 +10,33 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+ *
  */
+
+@import 'bootstrap';
+@import 'comments';
+@import 'home';
+@import 'posts';
+@import 'comments';
+@import 'users';
+
+#user_info{
+	height: auto;
+	widows: 100%;
+	border: solid 1px black;
+	#user-name-wrapper{
+		height: auto;
+		margin: 2% auto;
+		text-align: center;
+		border:solid;
+	}
+
+	#user-info-wrapper{
+		height: auto;
+		margin: 2% auto;
+		border:solid;
+		#about{
+			padding: 2%;
+		}
+	}
+}
