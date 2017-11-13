@@ -1,5 +1,5 @@
 <h1>Posts#show</h1>
-<div class="post-wrapper" onclick="">
+<div class="post-wrapper">
 	<div class="display-name-wrapper">
 		<%= link_to "@#{@post.user.dis_name}", user_path(@post.user_id) %>
 	</div>
@@ -7,7 +7,8 @@
 		<strong><%= best_in_place_if @post.user.id == current_user.id, @post, :title, :as => :input %></strong>
 	</div>
 	<div class="content-wrapper">
-		<%= best_in_place_if @post.user.id == current_user.id, @post, :content, :as => :textarea %>	</div>
+		<%= best_in_place_if @post.user.id == current_user.id, @post, :content, :as => :textarea %>	
+	</div>
 	<div class="options-wrapper">
 		<% if @post.user.id == current_user.id %>
 			<%= link_to "Edit", edit_post_path(@post) %>
@@ -16,26 +17,27 @@
 
 	</div>
 	<div class="new-comment-wrapper">
-		<%= form_with model: @comment, url: post_comments_path do |f| %>
-		<input type="hidden" name="user_id" value="current_user.id">
-		<input type="hidden" name="post_id" value="#{@post.id}">
+		<%= form_with model: @comment, url: post_comments_path(post_id: @post.id), scope: 'comment' do |f| %>
+			<%= f.hidden_field :post_id, value: @post.id %>
+			<%= f.hidden_field :user_id, value: current_user.id %>
 
-		<div class="content-wrapper">
-			<%= f.text_area :content, placeholder: 'Post Body' %>
-		</div>
-		<div class="options-wrapper">
-			<%= f.submit %>
-		</div>
-	<% end -%>
+			<div class="content-wrapper">
+				<%= f.text_area :content, placeholder: 'Post Body' %>
+			</div>
+			<div class="options-wrapper">
+				<%= f.submit %>
+			</div>
+		<% end -%>
 	</div>
+
 	<% @comments.find_each do |comment| %>
 		<div class="comment-wrapper">
 			<div class="display-name-wrapper">
-				<%= link_to "@#{@post.user.dis_name}", user_path(@post.user_id) %>
+				<%= link_to "@#{comment.user.dis_name}", user_path(comment.user.id) %>
 			</div>
 			<div class="content-wrapper">
-				<%= comment %>
+				<%= comment.content %>
 			</div>
 		</div>
 	<% end %>
-	</div>
+</div>

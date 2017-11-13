@@ -2,23 +2,27 @@ class PostsController < ApplicationController
   before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @posts = current_user.posts.all
+    @comments = Comment.all
   end
 
   def new
     p params
     @post = Post.new
+    @comment = Comment.new(post_id: params[:post_id])
   end
 
   def create
     @user = current_user
     @post = @user.posts.create(post_params)
-    redirect_to @post
+    redirect_to root_path
   end
 
   def show
+    p params
     @post = Post.find(params[:id])
-    @comments = Comment.where(:post_id == @post.id)
+    @comments = Comment.where(post_id: params[:id])
+    p params
   end
 
   def edit

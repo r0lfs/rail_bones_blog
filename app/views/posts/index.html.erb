@@ -1,2 +1,21 @@
 <h1>Posts#index</h1>
 <p>Find me in app/views/posts/index.html.erb</p>
+
+<% @posts.reverse.each do |post| %>
+<div class="post-wrapper">
+	<div class="display-name-wrapper">
+		<%= link_to "@#{current_user.dis_name}", user_path(current_user) %>
+	</div>
+	<div class="title-wrapper">
+		<strong><%= best_in_place_if post.user.id == current_user.id, post, :title, :as => :input %></strong>
+	</div>
+	<div class="content-wrapper">
+		<%= best_in_place_if post.user.id == current_user.id, post, :content, :as => :textarea %>	</div>
+	<div class="options-wrapper">
+		<%= link_to "Delete Post", post, method: :delete %>		
+	</div>
+	<% @comments.find_each do |comment| %>
+		<%= comment.content %>
+	<% end %>
+</div>
+<% end %>

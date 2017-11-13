@@ -1,15 +1,19 @@
 class CommentsController < ApplicationController
+  before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
+
   def index
   end
 
   def new
-    @comment = Comment.new
+    @comment = Comment.new(post_id: params[:id])
   end
 
   def create
-    @comment = Comment.new
-    @user = current_user
-    @post = 
+    @post = Post.find_by(params[:id])
+    @comment = Comment.new(comment_params)
+    @comment.save
+    # @comment = @post.comment.create(comment_params)
+    redirect_to root_path(@comment.post_id)
   end
 
   def show
@@ -22,5 +26,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    Comment.find(params[:id]).destroy
+    redirect_to root_path
+  end
+  private
+  def comment_params
+    params.require(:comment).permit(:user_id, :post_id, :content)
   end
 end

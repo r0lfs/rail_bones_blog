@@ -1,5 +1,20 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
+<div class="new-post-wrapper">
+	<%= form_with model: @post, url: user_posts_path(current_user), scope: 'post' do |f| %>
+		<input type="hidden" name="user_id" value="current_user.id">
+
+		<div class="title-wrapper">
+			<%= f.text_field :title, required: true, placeholder: 'Title' %>
+		</div>
+		<div class="content-wrapper">
+			<%= f.text_area :content, required: true, placeholder: 'Post Body' %>
+		</div>
+		<div class="options-wrapper">
+			<%= f.submit %>
+		</div>
+	<% end %>
+</div>
 
 <% @posts.reverse.each do |post| %>
 <div class="post-wrapper">
@@ -14,9 +29,40 @@
 	<div class="options-wrapper">
 		<% if post.user.id == current_user.id %>
 			<%= link_to "Edit", edit_post_path(post) %>
-			<%= link_to "Delete Post", post, method: :delete %>		
+			<%= link_to "Delete Post", post, method: :delete %>
 		<% end %>
+		<a href="" class="reply-link"	onclick="$('#new-comment<%= post.id %>').toggle(); event.preventDefault()">Reply</a>		
+		<a href="" class="comment-link" onclick="$('#comment<%= post.id %>').toggle(); event.preventDefault()">Show Comments</a>		
 	</div>
+	<div id="new-comment<%= post.id %>" class="new-comment-wrapper">
+		<%= form_with model: @comment, url: post_comments_path(post_id: post.id), scope: 'comment' do |f| %>
+		<%= f.hidden_field :post_id, value: post.id %>
+		<%= f.hidden_field :user_id, value: current_user.id %>
+
+		<div class="content-wrapper">
+			<%= f.text_area :content, required: true, placeholder: 'Post Body' %>
+		</div>
+		<div class="options-wrapper">
+			<%= f.submit %>
+		</div>
+	<% end -%>
+	</div>
+			<div class="comment-wrapper" id="comment<%= post.id %>">
+				<% @comments.where(post_id: post.id).find_each do |comment| %>
+					<div class="display-name-wrapper">
+						<%= link_to "@#{comment.user.dis_name}", user_path(comment.user.id) %>
+					</div>
+					<div class="content-wrapper">
+						<%= comment.content %>
+					</div>
+					<% if comment.user_id == current_user.id %>
+						<div class="options-wrapper">
+							<%= link_to "Delete Comment", comment, method: :delete %>
+						</div>
+					<% end %>
+				<% end %>
+			</div>
+
 </div>
 <% end %>
 

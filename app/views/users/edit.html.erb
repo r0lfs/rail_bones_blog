@@ -9,10 +9,10 @@
 		<%= f.text_field :last_name, placeholder: "Last Name", :maxlength => 25, :class => 'sign_in' %>
 	</div>
 	<div class="form-group">
-		<%= f.text_field :dis_name, placeholder: "*Display Name", :maxlength => 25, :class => 'sign_in' %>
+		<%= f.text_field :dis_name, required: true, placeholder: "*Display Name", :maxlength => 25, :class => 'sign_in' %>
 	</div>
 	<div class="form-group">
-		<%= f.text_field :email, placeholder: "*Email", :maxlength => 50, :class => 'sign_in' %>
+		<%= f.text_field :email, required: true, placeholder: "*Email", :maxlength => 50, :class => 'sign_in' %>
 	</div>
 	<div class="form-group">
 		<%= f.text_area :about, placeholder: 'About', :maxlength => 500, :class => 'sign_in' %>
@@ -30,3 +30,7 @@
 	</div>
 	<%= f.submit :class => 'btn btn-primary'  %>
 <% end %>
+
+
+<%= link_to "Delete Account", @user, method: :delete, data: { confirm: 'Are you sure you want to delete your account?' } %>		
+

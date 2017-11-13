@@ -6,13 +6,13 @@
 		<input type="hidden" name="user_id" value="current_user.id">
 
 		<div class="title-wrapper">
-			<strong><%= f.text_field :title, placeholder: 'Title' %></strong>
+			<strong><%= f.text_field :title, required: true, placeholder: 'Title' %></strong>
 		</div>
 		<div class="content-wrapper">
-			<%= f.text_area :content, placeholder: 'Post Body' %>
+			<%= f.text_area :content, required: true, placeholder: 'Post Body' %>
 		</div>
 		<div class="options-wrapper">
 			<%= f.submit %>
 		</div>
-	<% end -%>
+	<% end %>
 </div>

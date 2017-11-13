@@ -12,8 +12,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if user_params[:password] != '' and user_params[:email] != '' and user_params[:dis_name] != ''
-      @user.save
+    if @user.save
       session[:user_id] = @user.id
       redirect_to root_path
     else
@@ -44,6 +43,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
+    session[:user_id] = nil
     redirect_to users_path
   end
 
