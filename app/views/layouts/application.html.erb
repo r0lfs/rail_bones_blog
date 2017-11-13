@@ -23,7 +23,7 @@
                 <%= link_to "Home", root_path, :class => "nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to "New Post", new_user_post_path(current_user), :class => 'nav-link' %>
+                <%= link_to "All Users", users_path, :class => 'nav-link' %>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile Options</a>
@@ -45,7 +45,16 @@
             </ul>
           <% end %>
             <div class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <%= form_tag(search_users_path, method: 'get') do %>
+                <%= text_field_tag :search, params[:search_name], :autocomplete => :on, :id => 'user_search' %>
+                <%= submit_tag("Search", name: nil) %>
+              <% end %>
+              <!-- <input class="form-control mr-sm-2" type="search" id="user_search" placeholder="Search" aria-label="Search"> -->
+              <div id="results"></div>
+            </div>
+            <div class="col-sm-3 ui-widget" id="search-wrapper">
+              <!-- <div><input type="text" id="user_search" placeholder="Search for User"></div> -->
+              
             </div>
         </div>
       </nav>
@@ -53,19 +62,26 @@
   	<div class="container">
   		<div class="row">
        <% if user_logged_in? %>
-          <div class="col-sm-3" id="user_info">
+        <div class="col-sm-3" id="user_info">
           <div id="user-name-wrapper">
-            <h3><%= link_to "@#{current_user.dis_name}", user_path(current_user) %>
+            <h3><%= link_to "@#{current_user.dis_name}", user_path(current_user) %></h3>
           </div>
           <div id="user-info-wrapper">
+            <div class="posts_comments">
+              <div class="user-post-count">
+              <h6>Posts:</h6>
+                <%= current_user.posts.count %>
+              </div>
+              <div class="user-comment-count">  
+                <h6> Comments:</h6>
+                <%= current_user.comments.count %>
+              </div>
+            </div>
             <div id="about">
-              <p>
-                <%= current_user.about %>
-              </p>
+              <%= current_user.about %>
             </div>
           </div>
-          <div id="user-info-wrapper"></div>
-          </div>
+        </div>
         <% else %>
           <div class="col-sm-3"></div> <!--for spacing purposes only -->
         <% end %>

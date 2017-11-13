@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :users do
   	resources :posts, shallow: true
+    post 'search',  :on => :collection
+
   end
 
   resources :posts do

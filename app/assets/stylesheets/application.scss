@@ -43,10 +43,26 @@ body{
 	#user-info-wrapper{
 		height: auto;
 		margin: 2% auto;
-		border:solid;
+		border:solid 1px black;
+		.posts_comments{
+			align-content: center;
+			margin: 0 5%;
+			.user-post-count{
+				width: 45%;
+				display: inline-block;
+				text-align: center;
+			}
+			.user-comment-count{
+				width: 45%;
+				display: inline-block;
+				text-align: center;
+			}
+		}
 		#about{
+			margin: 2%;
 			padding: 2%;
 			overflow: auto;
+			border: solid 1px black;
 		}
 	}
 }

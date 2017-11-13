@@ -49,6 +49,16 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def search
+    puts "here are the params #{params.inspect}"
+    @users = User.where('display_name LIKE ?', "%#{params[:search_name]}%")
+    respond_to do |format|
+     format.js  { render :partial => "elements/livesearch", :locals => {:search => @users, :query => params[:search_name]} }
+     format.html    { render :index }
+    end
+    render :layout, false
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :dis_name, :email, :password, :about)

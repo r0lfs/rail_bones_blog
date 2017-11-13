@@ -12,15 +12,17 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree 
 //= require jquery3
 //= require jquery
-//= require popper
-//= require bootstrap
-//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery.purr
 //= require best_in_place
+//= require popper
+//= require_tree 
+//= require bootstrap
+//= require bootstrap-sprockets
+
+
 
 $(document).ready(function() {
   /* Activating Best In Place */

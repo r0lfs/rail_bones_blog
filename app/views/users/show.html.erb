@@ -1,7 +1,24 @@
 <h1>Users#show</h1>
 <div class="profile-wrapper">
 	<div class="user-information">
-		
+		<div class="dis-name-wrapper">
+			<h2><%= link_to "@#{@user.dis_name}", user_path(@user) %></h2>
+			<button>Follow Button</button>
+		</div>
+		<div class="about-wrapper">
+			<h5>About:</h5>
+			<%= @user.about %>		
+		</div>
+		<div class="user-stats">
+			<div id="posts_comments">
+
+				<h4>Posts: <%= @user.posts.count %></h4>
+				<h4>Comments: <%= @user.comments.count %> </h4>
+			</div>
+			<div class="follows">
+				
+			</div>
+		</div>
 	</div>
 	<% @posts.reverse.each do |post| %>
 		<div class="post-wrapper">

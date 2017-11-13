@@ -19,3 +19,75 @@
 .sign_in_notes{
 	margin-left: 10%;
 }
+
+.profile-wrapper{
+	width: 100%;
+	height: auto;
+	border: solid 1px black;
+	overflow: hidden;
+	background: white;
+	// padding: 2%;
+
+	.user-information{
+		width: 100%;
+		height: auto;
+		display: inline-block;
+		// padding: 2%;
+		// margin: 2%;
+		
+		.dis-name-wrapper{
+			width: 100%;
+			height: auto;
+			padding: 2%;
+		}
+		.about-wrapper{
+			width: 96%;
+			height: auto;
+			min-height: 50px;
+			margin: 0 2%;
+			padding: 2%;
+			border: solid 1px black;
+		}
+		.user-stats{
+			width: 96%;
+			margin: 1% 2%;
+			float: right;
+			h4{
+				display: inline-block;
+				padding-right: 3%;
+			}
+		}
+	}
+}
+
+.user-index-profile{
+	width: 100%;
+	margin: 0.5% 2%;
+	border: solid 1px black;
+	padding: 2%;
+	background: white;
+	
+	.user-name-wrapper{
+		margin: 0 5%;
+	}
+
+	.about{
+		padding: 2%;
+		border: solid 1px black;
+	}
+
+	.posts_comments{
+		display: inline-block;
+		width: 100%;
+		.users-post-count{
+			display: inline-block;
+			text-align: center;
+			width: 45%;
+		}
+		.users-comment-count{
+			display: inline-block;
+			text-align: center;
+			width: 45%;
+		}
+	}
+}
