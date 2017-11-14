@@ -76,6 +76,16 @@
                 <h6> Comments:</h6>
                 <%= current_user.comments.count %>
               </div>
+              <div class="followers-following">
+                <div class="user-following">
+                  <h6>Following</h6>
+                  <%= current_user.following.count %>
+                </div>
+                <div class="user-followers">
+                  <h6>Followers</h6>
+                  <%= current_user.followers.count %>
+                </div>
+              </div>
             </div>
             <div id="about">
               <%= current_user.about %>
