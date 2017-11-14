@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate, only: [:edit, :update, :destroy]
+  before_action :user_logged_in?, only: [:following, :followers]
 
   def index
     @users = User.all
@@ -57,6 +58,28 @@ class UsersController < ApplicationController
      format.html    { render :index }
     end
     render :layout, false
+  end
+
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.all
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.all
+    render 'show_follow'
+  end
+
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  def unfollow(other_user)
+    following.delete(other_user)
   end
 
   private

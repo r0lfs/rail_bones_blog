@@ -1,0 +1,11 @@
+<% provide(:title, @title) %>
+    <div class="user_info">
+      <h1><%= @user.dis_name %></h1>
+    </div>
+ 
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+      <ul class="users follow">
+        <%= render @users %>
+      </ul>
+    <% end %>

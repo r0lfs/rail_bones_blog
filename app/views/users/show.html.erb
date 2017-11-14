@@ -3,7 +3,7 @@
 	<div class="user-information">
 		<div class="dis-name-wrapper">
 			<h2><%= link_to "@#{@user.dis_name}", user_path(@user) %></h2>
-			<button>Follow Button</button>
+			<%= render 'follow_form' %>
 		</div>
 		<div class="about-wrapper">
 			<h5>About:</h5>
