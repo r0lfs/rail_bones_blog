@@ -1,0 +1,11 @@
+<%= form_with model: @comment, url: post_comments_path(post_id: post.id), scope: 'comment' do |f| %>
+	<%= f.hidden_field :post_id, value: post.id %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+
+	<div class="content-wrapper">
+		<%= f.text_area :content, required: true, placeholder: 'Write New Comment' %>
+	</div>
+	<div class="options-wrapper">
+		<%= f.submit :class => "btn btn-outline-primary btn-sm" %>
+	</div>
+<% end %>

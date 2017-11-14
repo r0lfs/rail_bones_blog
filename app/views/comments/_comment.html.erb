@@ -1,0 +1,14 @@
+<div class="comment">
+	<div class="comment-name-wrapper">
+		<%= link_to "@#{comment.user.dis_name}:", user_path(comment.user.id) %> <br>
+		<span >Replying to <%= comment.post.user.dis_name %></span>
+	</div>
+	<div class="comment-actual">
+		<%= best_in_place_if comment.user_id == current_user.id, comment, :content, :as => :textarea %>
+	</div>
+	<% if comment.user_id == current_user.id %>
+		<div class="delete-wrapper">
+			<%= link_to "Delete Comment", comment, method: :delete, :class => 'badge badge-danger destroy_comment', remote: true %>
+		</div>
+	<% end %>
+</div>

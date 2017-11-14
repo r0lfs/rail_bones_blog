@@ -1,0 +1,13 @@
+<%= form_with model: @post, url: user_posts_path(current_user), id: 'new-post', scope: 'post' do |f| %>
+	<input type="hidden" name="user_id" value="current_user.id">
+
+	<div class="title-wrapper">
+		<%= f.text_field :title, required: true, placeholder: 'Title', :class => 'title' %>
+	</div>
+	<div class="content-wrapper">
+		<%= f.text_area :content, required: true, placeholder: 'Post Body', :class => 'content' %>
+	</div>
+	<div class="options-wrapper">
+		<%= f.submit :class => 'btn btn-secondary', :value =>'New Post' %>
+	</div>
+<% end %>

@@ -1,9 +1,9 @@
-<% if @user != current_user %>
+<% if @user.id != current_user.id %>
   <div id="follow_form">
-     <% if current_user.following.include?(@user) %>
-    <%= render 'unfollow' %>
-  <% else %>
-    <%= render 'follow' %>
-  <% end %>
+    <% if current_user.following.include?(@user) %>
+   	  <%= render 'unfollow' %>
+  	<% else %>
+    	<%= render 'follow' %>
+  	<% end %>
   </div>
 <% end %>
