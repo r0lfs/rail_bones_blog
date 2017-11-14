@@ -55,14 +55,16 @@
 		<% @comments.where(post_id: post.id).find_each do |comment| %>
 			
 			<div class="comment-content-wrapper">
-				<div class="display-name-wrapper">
+				<div class="comment-name-wrapper">
 					<%= link_to "@#{comment.user.dis_name}", user_path(comment.user.id) %>
 				</div>
-				<div class="content-wrapper">
+				<div class="comment-actual">
 					<%= comment.content %>
 				</div>
 				<% if comment.user_id == current_user.id %>
-					<%= link_to "Delete Comment", comment, method: :delete, :class => 'badge badge-danger' %>
+					<div class="delete-wrapper">
+						<%= link_to "Delete Comment", comment, method: :delete, :class => 'badge badge-danger' %>
+					</div>
 				<% end %>
 			</div>
 			

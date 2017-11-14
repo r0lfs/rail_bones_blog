@@ -27,13 +27,7 @@
 
 	.new-comment-wrapper{
 		display: none;
-	}
-
-	.comment-wrapper{
-		display: none;
-		textarea{
-			overflow: hidden;
-		}
+		margin-bottom: 1%;
 	}
 
 	.options-wrapper{
@@ -44,11 +38,22 @@
 		}
 	}
 
-	.comment-content-wrapper{
-		width: 80%;
-		margin: 0.25% 10%;
-		border: solid 1px black;
+
+	.comment-wrapper{
+		display: none;
+		textarea{
+			overflow: hidden;
+		}
+	
+		.comment-content-wrapper{
+			width: 80%;
+			margin: 0.25% 10%;
+			padding: 0.5% 2%;
+			border: solid 1px black;
+		}
+
 	}
+
 }
 
 #new-post-wrapper{
