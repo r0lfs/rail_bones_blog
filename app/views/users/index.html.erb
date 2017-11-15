@@ -1,23 +1,6 @@
-<h1>Users#index</h1>
-<% @users.reverse.each do |user| %>
-	<div class="user-index-profile">
-		<div class="user-name-wrapper">
-      <h5><%= link_to "@#{user.dis_name}", user_path(user) %></h5>
-    </div>
-    <div class="about">
-      <%= user.about %>
-    </div>
-    <div class="posts_comments">
-      <div class="users-post-count">
-        <h6>Posts:</h6>
-        <%= user.posts.count %>
-      </div>
-
-      <div class="users-comment-count">  
-        <h6> Comments:</h6>
-        <%= user.comments.count %>
-      </div>
-
-    </div>
-  </div>
-<% end %>
+<h1>All Users:</h1>
+<div class="users">
+  <% @users.reverse.each do |user| %>
+    <%= render user %>
+  <% end %>
+</div>

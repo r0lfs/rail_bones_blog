@@ -1,0 +1,45 @@
+<div class="post">
+	
+	<div class="title-wrapper">
+		<div class="display-name-wrapper">
+			<%= link_to "@#{post.user.dis_name} ", user_path(post.user_id) %>says:
+		</div>
+		<strong><h3><%= best_in_place_if post.user.id == current_user.id, post, :title, :as => :input %></h3></strong> 
+	</div>
+
+	<div class="content-wrapper">
+		<%= best_in_place_if post.user.id == current_user.id, post, :content, :as => :textarea %>
+	</div>
+
+	<div class="options-wrapper">
+		<a href="" class="options badge badge-info reply-click"	onclick="$('#new-comment<%= post.id %>').toggle(); event.preventDefault()">Reply</a>
+
+		<% if post.comments.count > 0 %>
+			<a href="" class="options badge badge-info show-click" onclick="$('#comment<%= post.id %>').toggle(); event.preventDefault()">Show Comments</a>	
+		<% end %>		
+		<% if post.user.id == current_user.id %>
+			<%= link_to "Delete Post", post, method: :delete, :class => 'options badge badge-danger destroy_post', remote: true %>
+		<% end %>	
+	</div>
+
+	<div id="new-comment<%= post.id %>" class="new-comment">
+		<%= form_with model: @comment, url: post_comments_path(post_id: post.id), class: 'a-new-comment', scope: 'comment' do |f| %>
+			<%= f.hidden_field :post_id, value: post.id %>
+			<%= f.hidden_field :user_id, value: current_user.id %>
+
+			<div class="content-wrapper">
+				<%= f.text_area :content, required: true, placeholder: 'Write New Comment' %>
+			</div>
+			<div class="options-wrapper">
+				<%= f.submit :class => "btn btn-outline-primary btn-sm" %>
+			</div>
+		<% end %>
+	</div>
+
+	<div class="comments" id="comment<%= post.id %>">
+		<% post.comments.each do |comment| %>
+			<%= render comment %>
+		<% end %>
+	</div>
+
+</div>

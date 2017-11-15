@@ -1,0 +1,17 @@
+$('#user_search').keyup(function() {
+	let search_term = $(this).val()
+	console.dir(search_term)
+	if (search_term.length > 0 ) {
+		console.log(search_term);
+		$.post(
+			'User.search', 
+			{search_term: search_term},
+			function (results) {
+				$('#results').html(results);
+			}
+		);
+	}	
+});
+
+let happy = 'Fuck'
+console.log(happy)

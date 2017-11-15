@@ -46,7 +46,7 @@
           <% end %>
             <div class="form-inline my-2 my-lg-0">
               <%= form_tag(search_users_path, method: 'get') do %>
-                <%= text_field_tag :search, params[:search_name], :autocomplete => :on, :id => 'user_search' %>
+                <%= text_field_tag :search, params[:search_name], :autocomplete => :off, :id => 'user_search' %>
                 <%= submit_tag("Search", name: nil) %>
               <% end %>
               <!-- <input class="form-control mr-sm-2" type="search" id="user_search" placeholder="Search" aria-label="Search"> -->

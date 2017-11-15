@@ -1,76 +1,10 @@
 <a href="" onclick="$('#new-post-wrapper').toggle(); event.preventDefault()"><h4>What Kind of Kool-Aid you Sippin' On?</h4></a>
 <div id="new-post-wrapper">
-	<%= form_with model: @post, url: user_posts_path(current_user), scope: 'post' do |f| %>
-		<input type="hidden" name="user_id" value="current_user.id">
-
-		<div class="title-wrapper">
-			<%= f.text_field :title, required: true, placeholder: 'Title' %>
-		</div>
-		<div class="content-wrapper">
-			<%= f.text_area :content, required: true, placeholder: 'Post Body' %>
-		</div>
-		<div class="options-wrapper">
-			<%= f.submit :class => 'btn btn-secondary', :value =>'New Post' %>
-		</div>
-	<% end %>
+	<%= render "posts/form" %>
 </div>
 
-<% @posts.reverse.each do |post| %>
-<div class="post-wrapper">
-	
-	<div class="title-wrapper">
-		<div class="display-name-wrapper">
-			<%= link_to "@#{post.user.dis_name}", user_path(post.user_id) %>
-		</div>
-		<strong><h3><%= best_in_place_if post.user.id == current_user.id, post, :title, :as => :input %></h3></strong> 
-	</div>
-
-	<div class="content-wrapper">
-		<%= best_in_place_if post.user.id == current_user.id, post, :content, :as => :textarea %>
-	</div>
-
-	<div class="options-wrapper">
-		<a href="" class="options badge badge-info"	onclick="$('#new-comment<%= post.id %>').toggle(); event.preventDefault()">Reply</a>		
-		<a href="" class="options badge badge-info" onclick="$('#comment<%= post.id %>').toggle(); event.preventDefault()">Show Comments</a>	
-		<% if post.user.id == current_user.id %>
-			<%= link_to "Delete Post", post, method: :delete, :class => 'options badge badge-danger' %>
-		<% end %>	
-	</div>
-
-	<div id="new-comment<%= post.id %>" class="new-comment-wrapper">
-		<%= form_with model: @comment, url: post_comments_path(post_id: post.id), scope: 'comment' do |f| %>
-			<%= f.hidden_field :post_id, value: post.id %>
-			<%= f.hidden_field :user_id, value: current_user.id %>
-
-			<div class="content-wrapper">
-				<%= f.text_area :content, required: true, placeholder: 'Write New Comment' %>
-			</div>
-			<div class="options-wrapper">
-				<%= f.submit :class => "btn btn-outline-primary btn-sm"%>
-			</div>
-		<% end -%>
-	</div>
-
-	<div class="comment-wrapper" id="comment<%= post.id %>">
-		<% @comments.where(post_id: post.id).find_each do |comment| %>
-			
-			<div class="comment-content-wrapper">
-				<div class="comment-name-wrapper">
-					<%= link_to "@#{comment.user.dis_name}", user_path(comment.user.id) %>
-				</div>
-				<div class="comment-actual">
-					<%= comment.content %>
-				</div>
-				<% if comment.user_id == current_user.id %>
-					<div class="delete-wrapper">
-						<%= link_to "Delete Comment", comment, method: :delete, :class => 'badge badge-danger' %>
-					</div>
-				<% end %>
-			</div>
-			
-		<% end %>
-	</div>
-
-</div>
+<div class="posts">
+	<% @posts.reverse.each do |post| %>
+		<%= render post %>
 <% end %>
-
+</div>
