@@ -13,10 +13,7 @@
 
 	<div class="options-wrapper">
 		<a href="" class="options badge badge-info reply-click"	onclick="$('#new-comment<%= post.id %>').toggle(); event.preventDefault()">Reply</a>
-
-		<% if post.comments.count > 0 %>
-			<a href="" class="options badge badge-info show-click" onclick="$('#comment<%= post.id %>').toggle(); event.preventDefault()">Show Comments</a>	
-		<% end %>		
+			<a href="" class="options badge badge-info show-click" id="reply-click<%= post.id %>" onclick="$('#comment<%= post.id %>').toggle(); event.preventDefault()">Show Comments</a>	
 		<% if post.user.id == current_user.id %>
 			<%= link_to "Delete Post", post, method: :delete, :class => 'options badge badge-danger destroy_post', remote: true %>
 		<% end %>	

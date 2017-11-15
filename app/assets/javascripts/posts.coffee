@@ -5,3 +5,8 @@
 # require jquery
 
 $('.best_in_place').best_in_place()
+
+$(document).on 'turbolinks:load',->
+	$('.destroy_post').on 'ajax:success', ->
+		$(this).closest('.post').remove()
+
