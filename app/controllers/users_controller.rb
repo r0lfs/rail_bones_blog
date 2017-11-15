@@ -4,6 +4,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    if params[:search]
+      @users = User.search(params[:search]).order("created_at DESC")
+    else
+      @users = User.all.order("created_at DESC")
+    end
   end
 
   def new
@@ -46,16 +51,6 @@ class UsersController < ApplicationController
       format.js
       format.html {redirect_to root_path}
     end
-  end
-
-  def search
-    puts "here are the params #{params.inspect}"
-    @users = User.where('display_name LIKE ?', "%#{params[:search_name]}%")
-    respond_to do |format|
-     format.js  { render :partial => "search_results", :locals => {:search => @users, :query => params[:search_name]} }
-     format.html    { render :index }
-    end
-    render layout: false
   end
 
   def following

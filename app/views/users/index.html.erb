@@ -1,6 +1,18 @@
+<% if !params[:search] %>
 <h1>All Users:</h1>
 <div class="users">
   <% @users.reverse.each do |user| %>
     <%= render user %>
   <% end %>
 </div>
+<% elsif @users.blank? %>
+<h1>No users with '<%= params[:search] %>' in name!</h1>
+<% else %>
+	<h1>Users with '<%= params[:search] %>' in name:</h1>
+	<div class="users">
+	  <% @users.reverse.each do |user| %>
+	    <%= render user %>
+	  <% end %>
+	</div>
+	
+<% end %>

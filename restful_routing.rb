@@ -10,7 +10,6 @@ relationships_destroy GET    /relationships/destroy(.:format)       relationship
                       PATCH  /posts/:id(.:format)                   posts#update
                       PUT    /posts/:id(.:format)                   posts#update
                       DELETE /posts/:id(.:format)                   posts#destroy
-         search_users POST   /users/search(.:format)                users#search
        following_user GET    /users/:id/following(.:format)         users#following
        followers_user GET    /users/:id/followers(.:format)         users#followers
                 users GET    /users(.:format)                       users#index
