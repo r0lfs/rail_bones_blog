@@ -8,7 +8,7 @@
 	</div>
 	<% if comment.user_id == current_user.id %>
 		<div class="delete-wrapper">
-			<%= link_to "Delete Comment", comment, method: :delete, :class => 'badge badge-danger destroy_comment', remote: true %>
+			<%= link_to "Delete", comment, method: :delete, :class => 'badge badge-danger destroy_comment', remote: true %>
 		</div>
 	<% end %>
 </div>

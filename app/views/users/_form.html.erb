@@ -1,0 +1,30 @@
+<%= form_with model: @user do |f| %>
+	<div class="form-group">
+		<%= f.text_field :first_name, placeholder: "First Name", :maxlength => 25, :class => 'form-control sign_in sign_in_top', :id => 'first_name' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :last_name, placeholder: "Last Name", :maxlength => 25, :class => 'sign_in form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :dis_name, required: true, placeholder: "*Display Name", :maxlength => 25, :class => 'sign_in form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :email, required: true, placeholder: "*Email", :maxlength => 50, :class => 'sign_in form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.text_area :about, placeholder: 'About', :maxlength => 250, :class => 'sign_in form-control' %>
+	</div>
+	<div class="sign_in_notes">
+		* denotes required field <br>
+	
+		<% if flash[:alert] %>
+			<p style="color: red;"><%= flash[:alert] %></p>
+		<% end %>
+	</div>
+	<% if !user_logged_in? %>
+		<div class="form-group">
+			<%= f.password_field :password, placeholder: "*Password", :maxlength => 25, :class => 'sign_in form-control' %>
+		</div>
+	<% end %>
+	<%= f.submit :class => 'btn btn-primary'  %>
+<% end %>
