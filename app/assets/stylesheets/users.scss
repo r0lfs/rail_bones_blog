@@ -20,7 +20,7 @@
 	margin-left: 10%;
 }
 
-.profile-wrapper{
+.users {
 	width: 100%;
 	height: auto;
 	border: solid 1px black;
@@ -28,66 +28,54 @@
 	background: white;
 	// padding: 2%;
 
-	.user-information{
-		width: 100%;
+	.user{
+		width: 96%;
 		height: auto;
 		display: inline-block;
-		// padding: 2%;
-		// margin: 2%;
-		
-		.dis-name-wrapper{
-			width: 100%;
-			height: auto;
-			padding: 2%;
+		margin: 2%;
+		border: solid 1px black;
+		background: ghostwhite;
+
+		.name_follow{
+			margin: 1% 5%;
+			h3{
+				display: inline-block;
+			}
+			span{
+				display: inline-block;
+			}
 		}
-		.about-wrapper{
-			width: 96%;
-			height: auto;
-			min-height: 50px;
-			margin: 0 2%;
+
+		.about{
+			width: 90%;
+			margin: 0 5%;
 			padding: 2%;
 			border: solid 1px black;
 		}
-		.user-stats{
-			width: 96%;
-			margin: 1% 2%;
-			float: right;
-			h4{
+
+		.posts_comments{
+			width: 90%;
+
+			.user-post-count{
 				display: inline-block;
-				padding-right: 3%;
+				text-align: center;
+				width: 20%;
 			}
-		}
-	}
-}
-
-.user-index-profile{
-	width: 100%;
-	margin: 0.5% 2%;
-	border: solid 1px black;
-	padding: 2%;
-	background: white;
-	
-	.user-name-wrapper{
-		margin: 0 5%;
-	}
-
-	.about{
-		padding: 2%;
-		border: solid 1px black;
-	}
-
-	.posts_comments{
-		display: inline-block;
-		width: 100%;
-		.users-post-count{
-			display: inline-block;
-			text-align: center;
-			width: 45%;
-		}
-		.users-comment-count{
-			display: inline-block;
-			text-align: center;
-			width: 45%;
+			.user-comment-count{
+				display: inline-block;
+				text-align: center;
+				width: 20%;
+			}
+			.user-following {
+				display: inline-block;
+				text-align: center;
+				width: 20%;
+			}
+			.user-followers{
+				display: inline-block;
+				text-align: center;
+				width: 20%;
+			}
 		}
 	}
 }

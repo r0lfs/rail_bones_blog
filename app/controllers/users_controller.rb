@@ -35,29 +35,27 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     #checks to make sure pass matches and email and dsiplay name aren't blank before updating
-    if @user.password == user_params[:password] and @user.update(user_params)
-      @user.update(user_params)
-      redirect_to @user
-    else
-      flash[:alert] = 'You did not enter the correct password'
-      redirect_to edit_user_path(@user)
-    end
+    @user.update(user_params)
+    redirect_to @user
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    session[:user_id] = nil
-    redirect_to users_path
+    respond_to do |format|
+      User.find(params[:id]).destroy
+      session[:user_id] = nil
+      format.js
+      format.html {redirect_to root_path}
+    end
   end
 
   def search
     puts "here are the params #{params.inspect}"
     @users = User.where('display_name LIKE ?', "%#{params[:search_name]}%")
     respond_to do |format|
-     format.js  { render :partial => "elements/livesearch", :locals => {:search => @users, :query => params[:search_name]} }
+     format.js  { render :partial => "search_results", :locals => {:search => @users, :query => params[:search_name]} }
      format.html    { render :index }
     end
-    render :layout, false
+    render layout: false
   end
 
   def following

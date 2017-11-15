@@ -10,10 +10,14 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find_by(params[:id])
-    @comment = Comment.new(comment_params)
-    @comment.save
+    respond_to do |format|
+      @comment = Comment.new(comment_params)
+      @comment.save
+      format.js 
+      format.html {redirect_to root_path}
+    end
     # @comment = @post.comment.create(comment_params)
-    redirect_to root_path(@comment.post_id)
+    # redirect_to root_path(@comment.post_id)
   end
 
   def show
@@ -26,9 +30,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find(params[:id]).destroy
-    redirect_to root_path
+    respond_to do |format|
+      Comment.find(params[:id]).destroy
+      format.js
+      format.html {redirect_to root_path}
+    end
   end
+  
   private
   def comment_params
     params.require(:comment).permit(:user_id, :post_id, :content)

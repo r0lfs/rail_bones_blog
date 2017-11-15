@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'relationships/destroy'
 
-  get 'home/index'
+  # get 'home/index'
   
   root 'home#index'
 

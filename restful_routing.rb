@@ -1,7 +1,6 @@
                Prefix Verb   URI Pattern                            Controller#Action
  relationships_create GET    /relationships/create(.:format)        relationships#create
 relationships_destroy GET    /relationships/destroy(.:format)       relationships#destroy
-           home_index GET    /home/index(.:format)                  home#index
                  root GET    /                                      home#index
            user_posts GET    /users/:user_id/posts(.:format)        posts#index
                       POST   /users/:user_id/posts(.:format)        posts#create

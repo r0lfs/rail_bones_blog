@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = current_user.posts.all
-    @comments = Comment.all
+    @post = Post.new
   end
 
   def new
@@ -13,9 +13,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    @user = current_user
-    @post = @user.posts.create(post_params)
-    redirect_to root_path
+    respond_to do |format|
+      @user = current_user
+      @post = @user.posts.create(post_params)
+      format.js 
+      format.html { redirect_to root_path }
+    end
   end
 
   def show
@@ -43,8 +46,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    Post.find(params[:id]).destroy
-    redirect_to root_path
+    respond_to do |format|
+      Post.find(params[:id]).destroy
+      format.js
+      format.html {redirect_to root_path}
+    end
   end
 
   private

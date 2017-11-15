@@ -33,6 +33,9 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 
 gem 'jquery-rails'
 
+#seed dump will copy info in db to the seed file
+gem 'seed_dump'
+#BIP allows in place editing
 gem 'best_in_place', '~> 3.1', '>= 3.1.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
