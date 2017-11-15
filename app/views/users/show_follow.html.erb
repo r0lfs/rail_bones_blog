@@ -5,9 +5,5 @@
  
     <h3><%= @title %></h3>
     <% if @users.any? %>
-      <ul class="users follow">
-        <% @users.each do |user| %>
-        	<h5><%= user.dis_name %></h5>
-        <% end %>
-      </ul>
+      <%= render @users %>
     <% end %>

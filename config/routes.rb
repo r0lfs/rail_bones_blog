@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :users do
   	resources :posts, shallow: true
-    post 'search',  :on => :collection
+    # post 'search_term',  :on => :collection
     member do
       get :following, :followers
     end
